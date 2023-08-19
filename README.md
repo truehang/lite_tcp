@@ -1,5 +1,5 @@
 # Lite TCP
-This is simple tcp server using epoll to enable several client connections.
+This is a simple tcp server using epoll to enable several client connections.
 ## Build
 ```mkdir -p build && cd build && cmake ..```  
 ```make```
