@@ -35,5 +35,15 @@ jobs:
       working-directory: ${{github.workspace}}/build
       # Execute tests defined by the CMake configuration.
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
-      run: ctest -C ${{env.BUILD_TYPE}}
-
+      run: ctest -C ${{env.BUILD_TYPE}} --return-failed --output-on-failure
+    
+    - name: Need to improve test case
+      if: ${{ failure() }}
+      run: |
+        curl -L   -X POST \
+        -H "Accept: application/vnd.github+json" \
+        -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+        -H "X-GitHub-Api-Version: 2022-11-28"  \
+        https://api.github.com/repos/${{ github.repository }}/issues \
+        -d '{"title":"Maybe need to improve test case because of workflow test failure (github run id: ${{ github.run_id }})",
+          "body":"This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**. \n\n due to failure in run: _${{ github.run_id }}_. Please check the test failure and update test case if necessary","labels":["workflow_failure"]}'

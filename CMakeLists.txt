@@ -20,6 +20,21 @@ target_link_libraries(mytcp_server lite_tcp)
 add_executable(mytcp_client src/mytcp_client.cpp)
 target_link_libraries(mytcp_client lite_tcp)
 
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/refs/tags/v1.14.0.zip
+)
+# For Windows: Prevent overriding the parent project's compiler/linker settings
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
+
+enable_testing()
+add_executable(lite_tcp_test test/lite_tcp_test.cc)
+target_link_libraries(lite_tcp_test GTest::gtest_main lite_tcp)
+
+include(GoogleTest)
+gtest_discover_tests(lite_tcp_test)
 
 install(TARGETS
   lite_tcp
