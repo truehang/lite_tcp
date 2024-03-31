@@ -35,6 +35,7 @@ public:
   bool send(char *data, size_t size);
   void stop();
   bool running() { return run_; }
+  bool ready() { return running() && !conn_fds_.empty(); }
 
 private:
   int sockfd_;

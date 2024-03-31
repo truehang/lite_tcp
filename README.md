@@ -2,9 +2,14 @@
 This is a simple tcp server using epoll to enable several client connections.
 ## Build
 ```bash
-mkdir -p build && cd build && cmake ..  
-make  
+ ./build.sh
 ```  
+## To clang-format your cpp file automatically
+Make pre_commit_script as a git hook, so every time you type `git commit` invokes clang-format.
+```bash
+mkdir -p .git/hooks/
+cp pre_commit_script .git/hooks/pre-commit
+```
 
 ## Run example
 One host runs tcp server:  

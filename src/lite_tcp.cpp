@@ -185,10 +185,18 @@ bool LiteTcpServer::run() {
   return true;
 }
 
+#define CHECKREADYINCLASS                                                      \
+  do {                                                                         \
+    if (!ready()) {                                                            \
+      std::cerr << "Client not send data yet, server only responds after "     \
+                   "client's input"                                            \
+                << std::endl;                                                  \
+      return false;                                                            \
+    }                                                                          \
+  } while (0)
+
 bool LiteTcpServer::send(BufType send_data) {
-  if (conn_fds_.empty()) {
-    return false;
-  }
+  CHECKREADYINCLASS;
   for (auto conn_fd : conn_fds_)
     if (write(conn_fd, send_data.data(), send_data.size()) < 0) {
       perror("write for");
@@ -198,9 +206,7 @@ bool LiteTcpServer::send(BufType send_data) {
 }
 
 bool LiteTcpServer::send(char *data, size_t size) {
-  if (conn_fds_.empty()) {
-    return false;
-  }
+  CHECKREADYINCLASS;
   for (auto conn_fd : conn_fds_)
     if (write(conn_fd, data, size) < 0) {
       perror("write");
@@ -245,7 +251,7 @@ bool LiteTcpClient::run() {
     return false;
   }
   run_ = true;
-  process_thread_ = std::thread([this] {
+  process_thread_ = std::thread([&] {
     std::vector<char> buf;
     buf.resize(1 << 20); // 1 M
     while (run_) {
