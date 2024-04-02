@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.8)
-project(lite_tcp)
+project(
+lite_tcp
+DESCRIPTION "A robust and simple tcp server can handles multiple tcp clients's communications."
+VERSION 0.1.0
+)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -36,6 +40,10 @@ target_link_libraries(lite_tcp_test GTest::gtest_main lite_tcp)
 include(GoogleTest)
 gtest_discover_tests(lite_tcp_test)
 
+set(CPACK_COMPONENTS_ALL
+    lite_tcp
+)
+
 install(TARGETS
   lite_tcp
   mytcp_server
@@ -43,8 +51,12 @@ install(TARGETS
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin
+  COMPONENT lite_tcp
 )
 
 install(DIRECTORY include/
-  DESTINATION include/)
+  DESTINATION include/ 
+  COMPONENT lite_tcp)
 
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+include(Packing)
