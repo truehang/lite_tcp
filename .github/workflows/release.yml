@@ -23,7 +23,7 @@ jobs:
       - name: Upload the artifacts
         uses: skx/github-action-publish-binaries@release-2.0
         with:
-          args: 'build/lite_tcp*.deb'
+          args: '${{ github.workspace }}/lite_tcp*.deb'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
