@@ -8,3 +8,4 @@ Recommend use clang-format tool to style your code, the style config is in .clan
 ```bash
 clang-format include/*.hpp src/*.cpp -style=file -i
 ```
+Since we will trigger clang-format to do the format when we do a git commit, this is what under the hood.
