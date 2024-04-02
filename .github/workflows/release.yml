@@ -1,21 +1,29 @@
 on:
   release:
     types: [created]
+
 name: Handle Release
+
 jobs:
   generate:
-    name: Create release-artifacts
+    name: Create release artifacts
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
       - name: Build
-        uses: ./.github/workflows/cmake-single-platform.yml
+        working-directory: ${{ github.workspace }}
+        run: cmake -B build
+          
       - name: Generate the artifacts
-        working-directory: ${{github.workspace}}/build
+        working-directory: ${{ github.workspace }}/build
         run: cpack -G DEB
+          
       - name: Upload the artifacts
-        working-directory: ${{github.workspace}}
         uses: skx/github-action-publish-binaries@release-2.0
         with:
-          args: 'lite_tcp*.deb'
+          args: 'build/lite_tcp*.deb'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
