@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.8)
 project(
 lite_tcp
 DESCRIPTION "A robust and simple tcp server can handles multiple tcp clients's communications."
-VERSION 0.1.0
+VERSION 0.1.20
 )
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
