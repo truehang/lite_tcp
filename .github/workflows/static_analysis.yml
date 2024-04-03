@@ -1,0 +1,17 @@
+name: Code Static Analysis Workflow
+# manual trigger
+on: 
+  workflow_dispatch:
+#  push:
+#    branches:
+#      - workflow-work-2
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Build
+        working-directory: ${{ github.workspace }}
+        run: ./build_with_static_analysis.sh
