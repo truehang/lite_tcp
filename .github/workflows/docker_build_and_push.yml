@@ -11,16 +11,6 @@ on:
 jobs:
   build_and_push:
     runs-on: ubuntu-latest
-    # To config multi-arch
-    strategy:
-      matrix:
-        platforms: 
-          - name: linux/amd64
-            tag: latest-amd64
-          - name: linux/arm64
-            tag: latest-arm64
-          - name: linux/arm/v7
-            tag: latest-armv7
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -44,9 +34,12 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          platforms: ${{ matrix.platforms.name }} 
+          platforms: linux/amd64,linux/arm64,linux/arm/v7
           push: true
           tags: |
-            ghcr.io/${{ github.repository_owner }}/lite_tcp:${{ matrix.platforms.tag }}
+            ghcr.io/${{ github.repository_owner }}/lite_tcp:latest
           annotations: |
-            org.opencontainers.image.description=Lite Tcp multi-arch docker image for development and test
+            "org.opencontainers.image.title"="Lite Tcp Docker image"
+            "org.opencontainers.image.description"="Lite Tcp multi-arch Docker image for development and test"
+            "org.opencontainers.image.version"="0.1.0"
+            "org.opencontainers.image.url"="https://github.com/truehang/lite_tcp"
