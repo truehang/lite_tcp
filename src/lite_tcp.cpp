@@ -72,7 +72,7 @@ LiteTcpServer::LiteTcpServer(const std::string &server_ip, int port,
   }
 
   struct sockaddr_in ser;
-  bzero(&ser, sizeof(ser));
+  memset(&ser, 0, sizeof(ser));
   ser.sin_family = AF_INET;
   ser.sin_addr.s_addr = inet_addr(server_ip.c_str()); // 0.0.0.0
   ser.sin_port = htons(port);
@@ -226,7 +226,7 @@ LiteTcpClient::LiteTcpClient(const std::string &server_ip, int server_port,
     : sockfd_(-1), run_(false), stop_(false), callback_(func) {
   sockfd_ = socket(AF_INET, SOCK_STREAM, 0);
   struct sockaddr_in cli;
-  bzero(&cli, sizeof(cli));
+  memset(&cli, 0, sizeof(cli));
   cli.sin_family = AF_INET;
   cli.sin_addr.s_addr = inet_addr(server_ip.c_str()); // "127.0.0.1"
   cli.sin_port = htons(server_port);
