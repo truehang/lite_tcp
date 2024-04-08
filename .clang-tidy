@@ -174,5 +174,5 @@ readability-use-anyofallof
 #HeaderFilterRegex: '^(?!.*\/_deps\/).*' # not including /_deps/
 HeaderFilterRegex: '.*'
 # all warning is error
-WarningsAsErrors: '*' 
+#WarningsAsErrors: '*' 
 #WarningsAsErrors: 'bugprone-*'

@@ -7,7 +7,6 @@ VERSION 0.1.21
 
 option(ENABLE_CLANG_TIDY "Run clang-tidy" OFF)
 if(ENABLE_CLANG_TIDY)
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_CLANG_TIDY "clang-tidy;-config-file=${CMAKE_SOURCE_DIR}/.clang-tidy")
 endif()
 
@@ -33,14 +32,6 @@ list(APPEND OUR_TARGETS mytcp_server)
 add_executable(mytcp_client src/mytcp_client.cpp)
 target_link_libraries(mytcp_client lite_tcp)
 list(APPEND OUR_TARGETS mytcp_client)
-
-if(ENABLE_CLANG_TIDY)
-foreach(item ${OUR_TARGETS})
-	message("Array element: ${item}")
-	set_target_properties(${item} PROPERTIES CXX_CLANG_TIDY "${CMAKE_CXX_CLANG_TIDY}")
-endforeach()
-endif()
-
 
 include(FetchContent)
 FetchContent_Declare(
