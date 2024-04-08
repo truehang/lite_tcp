@@ -1,17 +1,18 @@
 # Lite TCP
 This is a simple tcp server using epoll to enable several client connections.
+
 ## Build
 ```bash
- ./build.sh
+# Get into dev container
+# currently support linux/amd64
+./go_to_dev_container_amd64
+# (in container)
+./build.sh
 ``` 
 after build, it generates a debian package, you could also install it.
  
 ## To clang-format your cpp file automatically
 Make pre_commit_script as a git hook, so every time you type `git commit` invokes clang-format.
-```bash
-mkdir -p .git/hooks/
-cp pre_commit_script .git/hooks/pre-commit
-```
 This is very helpful when you want to contribute to this project or maintain your code.
 We need some principals about writing code, [please follow the rules](Develop.md).
 
