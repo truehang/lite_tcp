@@ -8,4 +8,3 @@ RUN useradd -m -u 1000 --shell /bin/bash user && adduser user sudo \
 	&& echo "user:user" | chpasswd
 USER user
 WORKDIR /home/user/ws
-

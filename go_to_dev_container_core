@@ -1,0 +1,52 @@
+#!/bin/bash
+set -xe
+#git clone https://github.com/truehang/lite_tcp.git
+#cd lite_tcp
+#if [ $# -ne 1 ]; then
+#	echo "need to specify a platform"
+#	exit 1
+#fi
+repo=ghcr.io/truehang/lite_tcp
+tag=latest
+img=${repo}:${tag}
+target_home=/home/user
+target_ws=${target_home}/ws
+cp pre-commit .git/hooks/
+# to enable multi-arch
+docker run --rm --privileged multiarch/qemu-user-static:register --reset
+#if [ $? -ne 0 ]; then
+#	echo "Use multiarch failed"
+#	exit 1
+#fi
+
+#if ! docker images | grep -q $img; then
+# echo "not found image, try to pull one"
+# docker pull $img
+# if [ $? -ne 0 ]; then
+#  echo "docker pull failed"
+#  exit 1 
+# fi
+#fi
+
+#actv_container_id=$(docker ps -qf "ancestor=$img"|awk 'NR==1') # only the first one
+#if [ -z $actv_container_id ]; then
+#  actv_container_id=$(docker ps -aqf "ancestor=$img"|awk 'NR==1')
+#  if [ -z $actv_container_id ]; then
+#	echo "run a container"
+#	docker run -itd -v $PWD:/home/user $img bash
+#	if [ $? -ne 0 ]; then
+#		echo "docker run failed"
+#		exit 1
+#	fi
+#  else
+#	docker start $actv_container_id
+#        if [ $? -ne 0 ]; then
+#                echo "docker start failed"
+#                exit 1
+#        fi
+#  fi
+#fi
+#actv_container_id=$(docker ps -qf "ancestor=$img"|awk 'NR==1')
+#docker exec -it $actv_container_id bash
+
+

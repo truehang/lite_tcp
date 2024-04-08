@@ -1,0 +1,7 @@
+#!/bin/bash
+set -xe
+source ./go_to_dev_container_core 
+#docker pull --platform linux/arm64,linux/amd64,linux/arm/v7 $img
+platform=linux/arm64
+docker pull --platform $platform $img
+docker run --rm -it --platform $platform -v $PWD:$target_ws -v $HOME:$target_home $img bash
