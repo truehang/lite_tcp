@@ -1,8 +1,6 @@
 From ubuntu:jammy
 MAINTAINER Hogan Chou <hoganchous@gmail.com>
 ARG DEBIAN_FRONTEND=noninteractive
-#RUN --mount=type=secret,id=github_token \
-#	cat /run/secrets/github_token
 RUN apt-get update && \
 apt-get install -y sudo libevent-dev libssl-dev \
 build-essential vim git cmake file clang-format clang-tidy
