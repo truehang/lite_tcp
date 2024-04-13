@@ -1,12 +1,12 @@
 name: Docker build and push
 
 on:
-  workflow_dispatch:
+  #  workflow_dispatch:
   push:
-#    paths:
-#      - 'Dockerfile'
-    branches:
-      - workflow-work-2
+    paths:
+      - 'Dockerfile'
+#    branches:
+#      - workflow-work-2
 
 jobs:
   build_and_push:
