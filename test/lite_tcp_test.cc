@@ -19,18 +19,20 @@ protected:
 };
 TEST_F(ServerTest, basicop) {
   EXPECT_EQ(server.run(), true);
-  EXPECT_EQ(server.send("OK", strlen("OK")), false);
+  const char *str_ok = "OK";
+  const char *str_hi = "Hi from server";
+  EXPECT_EQ(server.send(str_ok, strlen(str_ok)), false);
   EXPECT_EQ(server.running(), true);
   LiteTcpClient client;
   EXPECT_EQ(client.run(), true);
   EXPECT_EQ(client.running(), true);
-  EXPECT_EQ(server.send("Hi from server", strlen("Hi from server")), false);
-  EXPECT_EQ(client.send("OK", strlen("OK")), true);
+  EXPECT_EQ(server.send(str_hi, strlen(str_hi)), false);
+  EXPECT_EQ(client.send(str_ok, strlen(str_ok)), true);
   // Only after server receive data, it can send data to client
   while (!server.ready()) {
     usleep(10000);
   }
   // now server is ready to send data
-  EXPECT_EQ(server.send("Hi from server", strlen("Hi from server")), true);
+  EXPECT_EQ(server.send(str_hi, strlen(str_hi)), true);
   client.stop();
 }

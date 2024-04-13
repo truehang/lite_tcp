@@ -32,7 +32,7 @@ public:
   ~LiteTcpServer();
   bool run();
   bool send(BufType send_data);
-  bool send(char *data, size_t size);
+  bool send(const char *data, size_t size);
   void stop();
   bool running() { return run_; }
   bool ready() { return running() && !conn_fds_.empty(); }
@@ -54,7 +54,7 @@ public:
   ~LiteTcpClient();
   bool run();
   bool send(BufType send_data);
-  bool send(char *data, size_t size);
+  bool send(const char *data, size_t size);
   void stop();
   bool running() { return run_; }
 
