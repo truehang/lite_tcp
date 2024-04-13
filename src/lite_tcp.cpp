@@ -205,7 +205,7 @@ bool LiteTcpServer::send(BufType send_data) {
   return true;
 }
 
-bool LiteTcpServer::send(char *data, size_t size) {
+bool LiteTcpServer::send(const char *data, size_t size) {
   CHECKREADYINCLASS;
   for (auto conn_fd : conn_fds_)
     if (write(conn_fd, data, size) < 0) {
@@ -281,7 +281,7 @@ bool LiteTcpClient::send(BufType send_data) {
   return true;
 }
 
-bool LiteTcpClient::send(char *data, size_t size) {
+bool LiteTcpClient::send(const char *data, size_t size) {
   if (write(sockfd_, data, size) < 0) {
     std::cout << "write error" << std::endl;
     return false;
