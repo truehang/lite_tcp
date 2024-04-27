@@ -15,8 +15,11 @@ jobs:
       - name: Generate the artifacts
         working-directory: ${{ github.workspace }}
         run: |
+          sudo chmod a+x *.sh
           ./dev_amd64 ./build_test_pack.sh
+          rm -rf build
           ./dev_arm64 ./build_test_pack.sh
+          rm -rf build
           ./dev_armv7 ./build_test_pack.sh
           
       - name: Upload the artifacts
