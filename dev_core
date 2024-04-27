@@ -10,4 +10,8 @@ cp pre-commit .git/hooks/
 docker pull --platform $platform $img
 # to enable multi-arch
 docker run --rm --privileged tonistiigi/binfmt:latest --install all
-docker run --rm -it --platform $platform -v $PWD:$target_ws -v $HOME:$target_home $img $command
+if [ -z $command ]; then
+docker run --rm -it --platform $platform -v $PWD:$target_ws -v $HOME:$target_home $img
+else
+docker run --rm  --platform $platform -v $PWD:$target_ws -v $HOME:$target_home $img $command
+fi
