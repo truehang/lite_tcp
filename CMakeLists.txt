@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.8)
 project(
 lite_tcp
 DESCRIPTION "A robust and simple tcp server can handles multiple tcp clients's communications."
-VERSION 0.1.21
+VERSION 0.1.22
 )
 
 option(ENABLE_CLANG_TIDY "Run clang-tidy" OFF)
