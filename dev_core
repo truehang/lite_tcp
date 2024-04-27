@@ -1,0 +1,13 @@
+#!/bin/bash
+set -xe
+repo=ghcr.io/truehang/lite_tcp
+tag=latest
+img=${repo}:${tag}
+target_home=/home/user
+target_ws=${target_home}/ws
+cp pre-commit .git/hooks/
+#docker pull --platform linux/arm64,linux/amd64,linux/arm/v7 $img
+docker pull --platform $platform $img
+# to enable multi-arch
+docker run --rm --privileged tonistiigi/binfmt:latest --install all
+docker run --rm -it --platform $platform -v $PWD:$target_ws -v $HOME:$target_home $img bash

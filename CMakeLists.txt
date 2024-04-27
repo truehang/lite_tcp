@@ -10,6 +10,11 @@ if(ENABLE_CLANG_TIDY)
 set(CMAKE_CXX_CLANG_TIDY "clang-tidy;-config-file=${CMAKE_SOURCE_DIR}/.clang-tidy")
 endif()
 
+option(ENABLE_TESTS"Enable tests" OFF)
+if (${ENABLE_TESTS})
+    enable_testing()
+endif()
+
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
@@ -33,6 +38,7 @@ add_executable(mytcp_client src/mytcp_client.cpp)
 target_link_libraries(mytcp_client lite_tcp)
 list(APPEND OUR_TARGETS mytcp_client)
 
+if(BUILD_TESTING)
 include(FetchContent)
 FetchContent_Declare(
   googletest
@@ -55,6 +61,7 @@ target_link_libraries(lite_tcp_test GTest::gtest_main lite_tcp)
 
 include(GoogleTest)
 gtest_discover_tests(lite_tcp_test)
+endif()
 
 set(CPACK_COMPONENTS_ALL
     lite_tcp

@@ -1,0 +1,4 @@
+#!/bin/bash
+set -xe
+export platform=linux/amd64
+./dev_core 
