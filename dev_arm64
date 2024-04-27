@@ -1,0 +1,4 @@
+#!/bin/bash
+set -xe
+export platform=linux/arm64
+./dev_core 
