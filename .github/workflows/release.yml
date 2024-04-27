@@ -15,7 +15,9 @@ jobs:
       - name: Generate the artifacts
         working-directory: ${{ github.workspace }}
         run: |
+          sudo mkdir -p /home/user/ws
           sudo chmod a+x *.sh
+          mkdir -p build
           ./dev_amd64 ./build_test_pack.sh
           rm -rf build
           ./dev_arm64 ./build_test_pack.sh
