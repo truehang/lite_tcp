@@ -1,4 +1,6 @@
 #!/bin/bash
 set -xe
 export platform=linux/arm64
+# the command user want to run
+export command=$1
 ./dev_core 

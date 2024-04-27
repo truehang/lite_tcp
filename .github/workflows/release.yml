@@ -12,13 +12,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         
-      - name: Build
-        working-directory: ${{ github.workspace }}
-        run: cmake -B build
-          
       - name: Generate the artifacts
-        working-directory: ${{ github.workspace }}/build
-        run: cpack -G DEB
+        working-directory: ${{ github.workspace }}
+        run: |
+          ./dev_amd64 ./build_test_pack.sh
+          ./dev_arm64 ./build_test_pack.sh
+          ./dev_armv7 ./build_test_pack.sh
           
       - name: Upload the artifacts
         uses: skx/github-action-publish-binaries@release-2.0
